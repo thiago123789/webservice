@@ -11,6 +11,7 @@ class MobileRestHandler extends SimpleRest {
 
     function getClientes() {
 
+        //RETORNA O SELECT DA TABALA 'GASTRONOMIA' EM FORMATO DE ARRAY;
         $result = Execute('gastronomia');
         if(empty($result)) {
             $statusCode = 404;
@@ -18,7 +19,11 @@ class MobileRestHandler extends SimpleRest {
         } else {
             $statusCode = 200;
         }
-        
+
+        //IMPRIME O CONTEUDO ANTES DA CONVERSAO
+        echo print_r($result, true);
+
+        //AQ ERA PARA IMPRIMIR O JSON NA TELA COM O RESULTADO CONVERTIDO.
         echo print_r(json_encode($result), true);
 
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
