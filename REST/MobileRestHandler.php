@@ -18,8 +18,9 @@ class MobileRestHandler extends SimpleRest {
         } else {
             $statusCode = 200;
         }
-        ;
-        print sql2json('SELECT * FROM gastronomia');
+        
+        echo print_r(json_encode($result), true);
+
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this ->setHttpHeaders($requestContentType, $statusCode);
 

@@ -63,8 +63,8 @@ function find($table = null, $id = null ) {
 function Execute($table){
     // Db  Connectivity
     // query
-    $sql = "SELECT * FROM " . $table;
     $database = open_database();
+    $sql = "SELECT * FROM " . $table;
     $result = mysqli_query($database, $sql);
 
     if( mysqli_num_rows($result) > 0 ){
