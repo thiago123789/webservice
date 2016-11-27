@@ -9,10 +9,11 @@ require_once("Mobile.php");
 
 class MobileRestHandler extends SimpleRest {
 
-    function getClientes() {
 
-        //RETORNA O SELECT DA TABALA 'GASTRONOMIA' EM FORMATO DE ARRAY;
-        $result = Execute('gastronomia');
+
+    function getListClientes(){
+        $result = getList('gastronomia','nome');
+
         if(empty($result)) {
             $statusCode = 404;
             $result = array('error' => 'Nenhum cliente encontrado!!');
@@ -20,17 +21,28 @@ class MobileRestHandler extends SimpleRest {
             $statusCode = 200;
         }
 
-        //IMPRIME O CONTEUDO ANTES DA CONVERSAO
-        echo print_r($result, true);
+        $requestContentType = $_SERVER['HTTP_ACCEPT'];
+        $this ->setHttpHeaders($requestContentType, $statusCode);
 
-        //AQ ERA PARA IMPRIMIR O JSON NA TELA COM O RESULTADO CONVERTIDO.
-        echo print_r(json_encode($result), true);
+        $response = $this->encodejson($result);
+        echo $response;
+    }
 
+
+    function getClientes() {
+        $result = Execute('gastronomia');
+        if(empty($result)) {
+            $statusCode = 404;
+            $result = array('error' => 'Nenhum cliente encontrado!!');
+        } else {
+            $statusCode = 200;
+        }
+        
         $requestContentType = $_SERVER['HTTP_ACCEPT'];
         $this ->setHttpHeaders($requestContentType, $statusCode);
 
         if(strpos($requestContentType,'application/json') !== false){
-            $response = $this->encodeJson($result);
+            $response = $this->encodejson($result);
             echo $response;
         } else if(strpos($requestContentType,'text/html') !== false){
             $response = $this->encodeHtml($result);

@@ -213,4 +213,18 @@ function update($table = null, $id = 0, $data = null) {
 }
 
 
+function getList($table, $coluna){
+    $database = open_database();
+    $sql = "SELECT " . $coluna . " FROM " . $table;
+    $resultSet = $database->query($sql);
+
+    if( mysqli_num_rows($resultSet) > 0 ){
+        $response = ProcessDbData($resultSet);
+    }else{
+        $response = array();
+    }
+    mysqli_free_result($resultSet);
+    return $response;
+
+}
 

@@ -16,6 +16,11 @@ switch($view){
         $mobileRestHandler->getClientes();
         break;
 
+    case "nome":
+        $mobileRestHandler = new MobileRestHandler();
+        $mobileRestHandler->getListClientes();
+        break;
+
     case "single":
         // to handle REST Url /mobile/show/<id>/
         $mobileRestHandler = new MobileRestHandler();
@@ -24,6 +29,7 @@ switch($view){
 
     case "" :
         //404 - not found;
+        echo "deu merda";
         break;
 }
 ?>
