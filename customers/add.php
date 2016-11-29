@@ -53,8 +53,6 @@
                 <label for="campo3">Telefone</label>
                 <input type="text" class="form-control" name="customer['telefone']">
             </div>
-
-
         </div>
 
 
